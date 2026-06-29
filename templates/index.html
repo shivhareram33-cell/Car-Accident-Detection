@@ -1,0 +1,332 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Accident Detection System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+background:linear-gradient(135deg,#0f172a,#1e293b,#111827);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+
+}
+
+.container{
+
+width:90%;
+max-width:1100px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(20px);
+
+border:1px solid rgba(255,255,255,.15);
+
+border-radius:20px;
+
+padding:40px;
+
+box-shadow:0 10px 40px rgba(0,0,0,.5);
+
+animation:fade .8s;
+
+}
+
+@keyframes fade{
+
+from{
+opacity:0;
+transform:translateY(40px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+h1{
+
+font-size:40px;
+
+text-align:center;
+
+margin-bottom:10px;
+
+}
+
+.subtitle{
+
+text-align:center;
+
+color:#cbd5e1;
+
+margin-bottom:35px;
+
+}
+
+.upload-box{
+
+border:2px dashed #3b82f6;
+
+border-radius:15px;
+
+padding:40px;
+
+text-align:center;
+
+transition:.4s;
+
+background:rgba(255,255,255,.04);
+
+}
+
+.upload-box:hover{
+
+background:rgba(59,130,246,.1);
+
+border-color:#60a5fa;
+
+}
+
+input[type=file]{
+
+display:block;
+
+margin:20px auto;
+
+color:white;
+
+}
+
+button{
+
+background:linear-gradient(90deg,#2563eb,#7c3aed);
+
+padding:14px 35px;
+
+border:none;
+
+border-radius:10px;
+
+color:white;
+
+font-size:16px;
+
+cursor:pointer;
+
+transition:.3s;
+
+font-weight:600;
+
+}
+
+button:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 8px 25px rgba(37,99,235,.4);
+
+}
+
+.result{
+
+margin-top:40px;
+
+text-align:center;
+
+}
+
+.result h2{
+
+margin-bottom:20px;
+
+}
+
+.result img{
+
+width:100%;
+
+max-width:900px;
+
+border-radius:15px;
+
+border:3px solid rgba(255,255,255,.2);
+
+box-shadow:0 15px 35px rgba(0,0,0,.4);
+
+}
+
+.footer{
+
+margin-top:40px;
+
+text-align:center;
+
+color:#94a3b8;
+
+font-size:14px;
+
+}
+
+.status{
+
+margin-top:15px;
+
+font-size:15px;
+
+color:#22c55e;
+
+display:none;
+
+}
+
+.loader{
+
+margin:25px auto;
+
+width:60px;
+
+height:60px;
+
+border:6px solid rgba(255,255,255,.2);
+
+border-top:6px solid #3b82f6;
+
+border-radius:50%;
+
+animation:spin 1s linear infinite;
+
+display:none;
+
+}
+
+@keyframes spin{
+
+100%{
+transform:rotate(360deg);
+}
+
+}
+
+@media(max-width:768px){
+
+.container{
+
+padding:20px;
+
+}
+
+h1{
+
+font-size:28px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🚔 AI Accident Detection</h1>
+
+<p class="subtitle">
+
+Upload an Image or Video for Real-Time AI Accident Detection
+
+</p>
+
+<form action="/predict" method="POST" enctype="multipart/form-data" id="uploadForm">
+
+<div class="upload-box">
+
+<h3>📂 Select Image or Video</h3>
+
+<input type="file" name="file" required id="file">
+
+<button type="submit">Start Detection</button>
+
+<div class="loader" id="loader"></div>
+
+<div class="status" id="status">
+
+Processing with AI...
+
+</div>
+
+</div>
+
+</form>
+
+{% if image %}
+
+<div class="result">
+
+<h2>🖼 Detection Result</h2>
+
+<img src="{{ image }}">
+
+</div>
+
+{% endif %}
+
+{% if stream %}
+
+<div class="result">
+
+<h2>🎥 Live Detection</h2>
+
+<img src="{{ url_for('video_feed') }}">
+
+</div>
+
+{% endif %}
+
+<div class="footer">
+
+Powered by YOLO • Flask • OpenCV • AI Vision
+
+</div>
+
+</div>
+
+<script>
+
+document.getElementById("uploadForm").onsubmit=function(){
+
+document.getElementById("loader").style.display="block";
+
+document.getElementById("status").style.display="block";
+
+}
+
+</script>
+
+</body>
+</html>
+```

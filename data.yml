@@ -1,0 +1,13 @@
+path: "./archive/custom_dataset"
+
+train: images/train
+val: images/val
+
+nc: 5
+
+names:
+  0: No Accident
+  1: Minor Accident
+  2: Moderate Accident
+  3: Severe Accident
+  4: Totaled Vehicle
